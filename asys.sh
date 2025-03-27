@@ -14,9 +14,13 @@ show_help() {
   echo "   --help                   Show help menu"
 }
 
+show_ram() {
+  free -h | awk 'NR==2 {print "Memory Usages: " $3"/"$2}'
+}
+
 case "${1}" in
 --cpu) echo "cpu is showing" ;;
---ram) echo "ram is showing" ;;
+--ram) show_ram ;;
 --disk) echo "disk is showing" ;;
 --net) echo "net is showing" ;;
 --help) show_help ;;
