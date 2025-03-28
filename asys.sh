@@ -61,10 +61,20 @@ show_ram() {
 
 }
 
+show_disk() {
+  basic_info=$(df -hT | awk 'NR==1 || $2 ~ /(ext4|xfs|btrfs|zfs|overlay)/ || $7 ~ /(home|data|boot|tmp|var|mnt|opt|srv|root)/')
+  echo "${basic_info}"
+}
+
+if [[ $# -eq 0 ]]; then
+  echo "Error: No option provided! Use --help to see available options."
+  exit 1
+fi
+
 case "${1}" in
 --cpu) echo "cpu is showing" ;;
 --ram) show_ram ;;
---disk) echo "disk is showing" ;;
+--disk) show_disk ;;
 --net) echo "net is showing" ;;
 --help) show_help ;;
 *) echo "Invalid Option. Use --help to see available commands." ;;
