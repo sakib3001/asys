@@ -66,6 +66,11 @@ show_disk() {
   echo "${basic_info}"
 }
 
+show_net() {
+  basic_info=$(ip addr show | awk '/(^[0-9]|inet?)/')
+  echo "${basic_info}"
+}
+
 if [[ $# -eq 0 ]]; then
   echo "Error: No option provided! Use --help to see available options."
   exit 1
@@ -75,7 +80,7 @@ case "${1}" in
 --cpu) echo "cpu is showing" ;;
 --ram) show_ram ;;
 --disk) show_disk ;;
---net) echo "net is showing" ;;
+--net) show_net ;;
 --help) show_help ;;
 *) echo "Invalid Option. Use --help to see available commands." ;;
 esac
