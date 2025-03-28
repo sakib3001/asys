@@ -71,13 +71,17 @@ show_net() {
   echo "${basic_info}"
 }
 
+show_cpu() {
+  htop
+}
+
 if [[ $# -eq 0 ]]; then
   echo "Error: No option provided! Use --help to see available options."
   exit 1
 fi
 
 case "${1}" in
---cpu) echo "cpu is showing" ;;
+--cpu) show_cpu ;;
 --ram) show_ram ;;
 --disk) show_disk ;;
 --net) show_net ;;
